@@ -43,22 +43,22 @@ public class SelectRenderTaskScreen extends BaseOwoScreen<FlowLayout> {
         contentPanel.verticalAlignment(VerticalAlignment.CENTER);
 
         contentPanel.child(Containers.verticalFlow(Sizing.content(), Sizing.content())
-                .child(Components.button(Translate.gui("select_item_batch"), (ButtonComponent button) -> {
+                .child(((Component) Components.button(Translate.gui("select_item_batch"), (ButtonComponent button) -> {
                     RenderTask.BATCH_ITEM.action.accept("inventory", this.items);
                     this.close();
-                }).horizontalSizing(Sizing.fixed(80)).margins(Insets.bottom(5)))
-                .child(Components.button(Translate.gui("select_block_batch"), (ButtonComponent button) -> {
+                })).horizontalSizing(Sizing.fixed(80)).margins(Insets.bottom(5)))
+                .child(((Component) Components.button(Translate.gui("select_block_batch"), (ButtonComponent button) -> {
                     RenderTask.BATCH_BLOCK.action.accept("inventory", this.items);
                     this.close();
-                }).horizontalSizing(Sizing.fixed(80)).margins(Insets.bottom(5)))
-                .child(Components.button(Translate.gui("select_tooltip_batch"), (ButtonComponent button) -> {
+                })).horizontalSizing(Sizing.fixed(80)).margins(Insets.bottom(5)))
+                .child(((Component) Components.button(Translate.gui("select_tooltip_batch"), (ButtonComponent button) -> {
                     RenderTask.BATCH_TOOLTIP.action.accept("inventory", this.items);
                     this.close();
-                }).horizontalSizing(Sizing.fixed(80)).margins(Insets.bottom(5)))
-                .child(Components.button(Translate.gui("select_atlas"), (ButtonComponent button) -> {
+                })).horizontalSizing(Sizing.fixed(80)).margins(Insets.bottom(5)))
+                .child(((Component) Components.button(Translate.gui("select_atlas"), (ButtonComponent button) -> {
                     RenderTask.ATLAS.action.accept("inventory", this.items);
                     this.close();
-                }).horizontalSizing(Sizing.fixed(80)))
+                })).horizontalSizing(Sizing.fixed(80)))
                 .padding(Insets.of(5))
         );
 

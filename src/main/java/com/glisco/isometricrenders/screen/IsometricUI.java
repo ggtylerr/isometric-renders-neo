@@ -11,6 +11,7 @@ import io.wispforest.owo.ui.component.Components;
 import io.wispforest.owo.ui.component.LabelComponent;
 import io.wispforest.owo.ui.container.Containers;
 import io.wispforest.owo.ui.container.FlowLayout;
+import io.wispforest.owo.ui.core.Component;
 import io.wispforest.owo.ui.core.Insets;
 import io.wispforest.owo.ui.core.Sizing;
 import io.wispforest.owo.ui.core.VerticalAlignment;
@@ -26,7 +27,7 @@ public class IsometricUI {
         try (var builder = row(container)) {
             final var textBox = Components.textBox(sizing, content);
 
-            builder.row.child(textBox);
+            builder.row.child((Component) textBox);
             builder.row.child(Components.label(Translate.gui(key)).margins(Insets.left(8)));
 
             return textBox;
@@ -51,13 +52,13 @@ public class IsometricUI {
     }
 
     public static void booleanControl(FlowLayout container, Property<Boolean> property, String key) {
-        container.child(new PropertyCheckboxComponent(Translate.gui(key), property).margins(Insets.top(5)));
+        container.child(((Component) new PropertyCheckboxComponent(Translate.gui(key), property)).margins(Insets.top(5)));
     }
 
     public static void intControl(FlowLayout container, IntProperty property, String name, int step) {
         try (var builder = row(container)) {
-            builder.row.child(new PropertyTextFieldComponent(Sizing.fill(15), property));
-            builder.row.child(new PropertySliderComponent(Sizing.fill(80), Translate.gui(name), step, property).margins(Insets.left(5)));
+            builder.row.child((Component) new PropertyTextFieldComponent(Sizing.fill(15), property));
+            builder.row.child(((Component) new PropertySliderComponent(Sizing.fill(80), Translate.gui(name), step, property)).margins(Insets.left(5)));
         }
     }
 

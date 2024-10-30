@@ -11,6 +11,7 @@ import com.glisco.isometricrenders.util.Translate;
 import io.wispforest.owo.ui.component.ButtonComponent;
 import io.wispforest.owo.ui.component.Components;
 import io.wispforest.owo.ui.container.FlowLayout;
+import io.wispforest.owo.ui.core.Component;
 import io.wispforest.owo.ui.core.Insets;
 import io.wispforest.owo.ui.core.Sizing;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -152,8 +153,8 @@ public class BatchRenderable<R extends Renderable<?>> implements Renderable<Batc
                     batchRenderable.start();
                     button.active = false;
                 });
-                builder.row.child(startButton.horizontalSizing(Sizing.fixed(60)).margins(Insets.right(5)));
-                builder.row.child(Components.button(Translate.gui("batch.reset"), (ButtonComponent button) -> {
+                builder.row.child(((Component) startButton).horizontalSizing(Sizing.fixed(60)).margins(Insets.right(5)));
+                builder.row.child((Component) Components.button(Translate.gui("batch.reset"), (ButtonComponent button) -> {
                     batchRenderable.reset();
                     startButton.active = true;
                 }));

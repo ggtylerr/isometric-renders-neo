@@ -24,9 +24,10 @@ public class DrawContextMixin {
     private int isometric$tooltipHeight = 0;
 
     @Inject(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;push()V"), locals = LocalCapture.CAPTURE_FAILHARD)
-    private void captureTooltipDimensions(TextRenderer textRenderer, List<TooltipComponent> components, int x, int y, TooltipPositioner positioner, CallbackInfo ci, int width, int height) {
-        this.isometric$tooltipWidth = width;
-        this.isometric$tooltipHeight = height;
+    private void captureTooltipDimensions(TextRenderer textRenderer, List<TooltipComponent> components, int x, int y, TooltipPositioner positioner, CallbackInfo ci) {
+        // todo: fix
+        this.isometric$tooltipWidth = 0;
+        this.isometric$tooltipHeight = 0;
     }
 
     @ModifyVariable(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;push()V"), ordinal = 6)

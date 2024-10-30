@@ -10,6 +10,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import io.wispforest.owo.ui.component.ButtonComponent;
 import io.wispforest.owo.ui.component.Components;
 import io.wispforest.owo.ui.container.FlowLayout;
+import io.wispforest.owo.ui.core.Component;
 import io.wispforest.owo.ui.core.Insets;
 import io.wispforest.owo.ui.core.Sizing;
 import io.wispforest.worldmesher.WorldMesh;
@@ -160,7 +161,7 @@ public class AreaRenderable extends DefaultRenderable<AreaRenderable.AreaPropert
                 mesh.setFreezeEntities(aBoolean);
             });
 
-            container.child(Components.button(Translate.gui("rebuild_mesh"), (ButtonComponent button) -> mesh.scheduleRebuild())
+            container.child(((Component) Components.button(Translate.gui("rebuild_mesh"), (ButtonComponent button) -> mesh.scheduleRebuild()))
                     .horizontalSizing(Sizing.fixed(80))
                     .margins(Insets.top(5)));
         }

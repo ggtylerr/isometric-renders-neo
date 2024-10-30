@@ -19,6 +19,7 @@ import io.wispforest.owo.ui.component.Components;
 import io.wispforest.owo.ui.container.Containers;
 import io.wispforest.owo.ui.container.FlowLayout;
 import io.wispforest.owo.ui.core.Color;
+import io.wispforest.owo.ui.core.Component;
 import io.wispforest.owo.ui.core.Insets;
 import io.wispforest.owo.ui.core.*;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
@@ -28,6 +29,7 @@ import net.minecraft.client.gl.Framebuffer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ConfirmLinkScreen;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.tooltip.TooltipComponent;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.option.Perspective;
@@ -193,15 +195,15 @@ public class RenderScreen extends BaseOwoScreen<FlowLayout> {
         final ButtonWidget exportButton;
         try (var builder = IsometricUI.row(rightColumn)) {
             exportButton = Components.button(Translate.gui("export"), button -> this.captureScheduled = true);
-            builder.row.child(exportButton.horizontalSizing(Sizing.fixed(75)));
+            builder.row.child(((Component) exportButton).horizontalSizing(Sizing.fixed(75)));
 
-            builder.row.child(Components.button(Translate.gui("open_folder"), button -> {
+            builder.row.child(((Component) Components.button(Translate.gui("open_folder"), button -> {
                 Util.getOperatingSystem().open(this.renderable.exportPath().resolveOffset().toFile());
-            }).horizontalSizing(Sizing.fixed(75)).margins(Insets.left(5)));
+            })).horizontalSizing(Sizing.fixed(75)).margins(Insets.left(5)));
         }
 
         if (!GraphicsEnvironment.isHeadless()) {
-            rightColumn.child(Components.button(Translate.gui("export_to_clipboard"), button -> {
+            rightColumn.child(((Component) Components.button(Translate.gui("export_to_clipboard"), button -> {
 
                 this.notify(Translate.gui("copied_to_clipboard"));
 
@@ -211,7 +213,7 @@ public class RenderScreen extends BaseOwoScreen<FlowLayout> {
                 } catch (IOException e) {
                     IsometricRenders.LOGGER.error("mfw", e);
                 }
-            }).horizontalSizing(Sizing.fixed(75)));
+            })).horizontalSizing(Sizing.fixed(75)));
         }
 
         var resolutionField = IsometricUI.labelledTextField(rightColumn, String.valueOf(exportResolution), "renderer_resolution", Sizing.fixed(50));
@@ -266,12 +268,12 @@ public class RenderScreen extends BaseOwoScreen<FlowLayout> {
                             button.setMessage(Translate.gui("exporting"));
                         }
                     });
-                    builder.row.child(this.exportAnimationButton.horizontalSizing(Sizing.fixed(100)).margins(Insets.right(5)));
+                    builder.row.child(((Component) this.exportAnimationButton).horizontalSizing(Sizing.fixed(100)).margins(Insets.right(5)));
 
-                    builder.row.child(Components.button(Translate.gui("format." + animationFormat.extension), button -> {
+                    builder.row.child(((Component) Components.button(Translate.gui("format." + animationFormat.extension), button -> {
                         animationFormat = animationFormat.next();
                         button.setMessage(Translate.gui("format." + animationFormat.extension));
-                    }).horizontalSizing(Sizing.fixed(35)));
+                    })).horizontalSizing(Sizing.fixed(35)));
                 }
 
                 IsometricUI.dynamicLabel(rightColumn, () -> {
@@ -342,7 +344,7 @@ public class RenderScreen extends BaseOwoScreen<FlowLayout> {
             super.render(context, mouseX, mouseY, delta);
 
             if (this.exportAnimationButton != null) {
-                this.exportAnimationButton.tooltip(this.memoryGuard.getStatusTooltip(this.estimateMemoryUsage(exportFrames)).stream().map(text -> TooltipComponent.of(text.asOrderedText())).toList());
+                this.exportAnimationButton.setTooltip((Tooltip) this.memoryGuard.getStatusTooltip(this.estimateMemoryUsage(exportFrames)).stream().map(text -> TooltipComponent.of(text.asOrderedText())).toList());
             }
 
 //            fill(matrices, viewportEndX + 160, 45, viewportEndX + 168, 53, GlobalProperties.backgroundColor | 255 << 24);
