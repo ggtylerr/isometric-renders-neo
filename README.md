@@ -5,6 +5,11 @@
 [![release](https://img.shields.io/github/v/release/glisco03/isometric-renders?logo=github&style=for-the-badge)](https://github.com/glisco03/isometric-renders/releases)
 [![discord](https://img.shields.io/discord/825828008644313089?label=wisp%20forest&logo=discord&logoColor=white&style=for-the-badge)](https://discord.gg/xrwHKktV2d)
 
+# THIS IS UNOFFICIAL!
+This is a port of Isometric Renders to NeoForge and is not officially supported by gliscowo / WispForest. Expect bugs and crashes.
+
+[Original repo.](https://github.com/gliscowo/isometric-renders)
+
 ## Overview
 
 Isometric Renders allows you to take isometric screenshots, or rather, create renders of game objects like parts of world, blocks, items and entities.
