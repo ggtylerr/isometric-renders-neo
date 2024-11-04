@@ -11,7 +11,7 @@ credits = ""
 description = '''
 Creates high-resolution renders of game objects
 '''
-logoFile = "assets/isometric_renders/icon.png"
+logoFile = "assets/isometric-renders/icon.png"
 
 [[accessTransformers]]
 file = "META-INF/isometricrenders.accesstransformer.cfg"
@@ -37,19 +37,19 @@ side = "BOTH"
 modId = "fabric_api"
 required = true
 versionRange = "[0.101.2+2.0.10+1.21,)"
-ordering = "NONE"
+ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies.isometric_renders]]
 modId = "owo"
 required = true
 versionRange = "[0.12.15-beta.7+1.21,)"
-ordering = "NONE"
+ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies.isometric_renders]]
 modId = "worldmesher"
 required = true
 versionRange = "[0.4.7+1.21,)"
-ordering = "NONE"
+ordering = "AFTER"
 side = "BOTH"

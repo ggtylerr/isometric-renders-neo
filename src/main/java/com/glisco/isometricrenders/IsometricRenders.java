@@ -13,7 +13,6 @@ import io.wispforest.owo.ui.core.Positioning;
 import io.wispforest.owo.ui.core.Sizing;
 import io.wispforest.owo.ui.hud.Hud;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
@@ -24,15 +23,24 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.util.Identifier;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.glfw.GLFW;
 
-@Environment(EnvType.CLIENT)
-public class IsometricRenders implements ClientModInitializer {
+@Mod(IsometricRenders.MOD_ID)
+public class IsometricRenders {
 
     public static final Logger LOGGER = LogManager.getLogger();
-    public static final String VERSION = FabricLoader.getInstance().getModContainer("isometric-renders").get().getMetadata().getVersion().getFriendlyString();
+    public static final String VERSION = ModLoadingContext.get().getActiveContainer().getModInfo().getVersion().toString();
+    public static final String MOD_ID = "isometric_renders";
 
     public static ParticleRestriction<?> particleRestriction = ParticleRestriction.always();
 
@@ -43,11 +51,22 @@ public class IsometricRenders implements ClientModInitializer {
 
     public static final KeyBinding SELECT = new KeyBinding("key.isometric-renders.area_select", GLFW.GLFW_KEY_C, KeyBinding.MISC_CATEGORY);
 
-    @Override
-    public void onInitializeClient() {
+    @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    public static class ClientModEvents {
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            onInitializeClient();
+        }
+        @SubscribeEvent
+        public static void registerBindings(RegisterKeyMappingsEvent event) {
+            event.register(SELECT);
+        }
+    }
+
+    public static void onInitializeClient() {
         ClientCommandRegistrationCallback.EVENT.register(IsorenderCommand::register);
 
-        KeyBindingHelper.registerKeyBinding(SELECT);
+//        KeyBindingHelper.registerKeyBinding(SELECT);
 
         final var ioStateId = "io-state";
         final var areaSelectionHintId = "area-selection-hint";
