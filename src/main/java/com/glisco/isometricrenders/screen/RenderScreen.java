@@ -344,7 +344,7 @@ public class RenderScreen extends BaseOwoScreen<FlowLayout> {
             super.render(context, mouseX, mouseY, delta);
 
             if (this.exportAnimationButton != null) {
-                this.exportAnimationButton.setTooltip((Tooltip) this.memoryGuard.getStatusTooltip(this.estimateMemoryUsage(exportFrames)).stream().map(text -> TooltipComponent.of(text.asOrderedText())).toList());
+                this.exportAnimationButton.tooltip(this.memoryGuard.getStatusTooltip(this.estimateMemoryUsage(exportFrames)).stream().map(text -> TooltipComponent.of(text.asOrderedText())).toList());
             }
 
 //            fill(matrices, viewportEndX + 160, 45, viewportEndX + 168, 53, GlobalProperties.backgroundColor | 255 << 24);
